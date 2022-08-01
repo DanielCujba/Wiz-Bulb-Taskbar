@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WizBulbs</title>
+    <link rel="stylesheet" type="text/css" href="style.css" >
+    <script src='./button.js'></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="button" id="ON" onclick="api.func({'state': true})">ON</div>
+      <div class="button" id="OFF" onclick="api.func({'state':false})">OFF</div>
+      <div class="button" id="B10" onclick="api.func({'dimming':10})">10%</div>
+      <div class="button" id="B50" onclick="api.func({'dimming':50})">50%</div>
+      <div class="button" id="B100" onclick="api.func({'dimming':100})">100%</div>
+    </div>
+  </body>
+</html>
