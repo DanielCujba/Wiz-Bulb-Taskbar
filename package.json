@@ -12,7 +12,7 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.65",
     "electron": "^19.0.8"
   },
-  "name": "taskbarapp",
+  "name": "WIZ App",
   "version": "1.0.0",
   "description": "Testing",
   "main": "main.js",
@@ -21,7 +21,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "author": "",
+  "author": "Daniel Cujba",
   "license": "ISC",
   "config": {
     "forge": {

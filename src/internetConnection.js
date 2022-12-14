@@ -1,28 +1,47 @@
 const dgram = require("node:dgram");
 const find = require("local-devices");
 
-const MAC_adress="a8:bb:50:4c:e6:1a";
-const port=38899;
-const message={"method": "setPilot","params": {}}
-const getmsg={"method":"getPilot","params":{}}
-let address="";
+class InternetConnection{
+    constructor(MAC_address,IP=null){
+        if(IP==null){
+            this.findIP();
+        }
+        else{
+            this.address=IP;
+        }
+        this.MAC_address=MAC_address;
+        this.port=38899;
+        this.setmsg={"method": "setPilot","params": {}};
+        this.getmsg={"method":"getPilot","params":{}};
+        this.server=new dgram.createSocket("udp4");
+    }
 
-const sendData = (params)=>{
-    find().then(devices=>{
-        devices.forEach(device => {
-            if(device.mac===MAC_adress){
-                address=device.ip;
-            }
-        });
-        message.params=params
-    }).then(()=>{
-        server.send(JSON.stringify(message),port,address);
-    })   
-    const server=new dgram.createSocket("udp4");
-    server.on("message",(msg,rinfo)=>{
-        console.log(msg.toString()+" "+rinfo.toString());
-    });
+    sendData(params){
+        const message=this.setmsg;
+        message.params=params;
+        this.sendMessage(message);
+    }
     
-};
+    getState(){
+        this.sendMessage(this.getmsg);
+    }
+    
+    findIP(){
+        find().then(devices=>{
+            devices.forEach(device => {
+                if(device.mac===this.MAC_address){
+                    this.address=device.ip;
+                }
+            });
+        })
+    }
+    
+    sendMessage(message){
+        this.server.send(JSON.stringify(message),this.port,this.address);
+        this.server.on("message",(msg,rinfo)=>{
+            console.log(msg.toString()+" "+rinfo.toString());
+        });
+    }
+}
 
-module.exports={sendData}
+module.exports={InternetConnection}

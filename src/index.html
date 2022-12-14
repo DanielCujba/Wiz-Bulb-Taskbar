@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <title>WizBulbs</title>
     <link rel="stylesheet" type="text/css" href="style.css" >
-    <script src='./button.js'></script>
   </head>
   <body>
     <div class="container">
@@ -13,6 +12,13 @@
       <div class="button" id="B10" onclick="api.func({'dimming':10})">10%</div>
       <div class="button" id="B50" onclick="api.func({'dimming':50})">50%</div>
       <div class="button" id="B100" onclick="api.func({'dimming':100})">100%</div>
+      <div class="slider" id="temp">
+        <input class="range" id="range" type="range" min="2200" max="6300" onchange="api.func({'temp':parseInt(this.value)})"> 
+      </div>
+      <div class="slider" id="brightness">
+        <input class="range" id="range" type="range" min="10" max="100" onchange="api.func({'dimming':parseInt(this.value)})"> 
+      </div>
+      
     </div>
   </body>
 </html>
